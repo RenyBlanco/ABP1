@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>M4-ABP1 / Pacientes</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- BootStrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Datatable-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="./css/estilos.css">
+    </head>
+    <body>
+        <header>
+            <div class="opciones">
+                <div><span>BootCamp JS - Modulo 4</span></div>
+            </div>
+        </header>
+        <main>
+            <section class="container mt-5">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h4 style="color: gray;"><i class="fa-solid fa-hospital-user"></i> Pacientes</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table id="miTabla" class="table table-striped" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Rut</th>
+                                        <th>Edad</th>
+                                        <th>Diagnostico</th>
+                                        <th>Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla">
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Rut</th>
+                                        <th>Edad</th>
+                                        <th>Diagnostico</th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div> <!-- /.card-body -->
+                    </div> <!-- /.card -->
+                </div> <!-- /.col-12 -->
+            </section>
+        </main>
+        <footer class="footer">
+            <p>Derechos Reservados. Diseñado por <strong>Reinaldo Blanco</strong></p>
+        </footer>
+        <!-- JQuery-->
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+            <!-- Datatable JS-->
+        <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+        <script src="./js/scripts.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#miTabla').DataTable({
+                    'paging': true,
+                    'lengthChange': true,
+                    'searching': true,
+                    'ordering': true,
+                    'info': true,
+                    'autoWidth': false,
+                    language: {
+                        "decimal": "",
+                        "emptyTable": "No hay datos",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                        "infoFiltered": "(Filtro de _MAX_ total registros)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ registros",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "No se encontraron coincidencias",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Próximo",
+                            "previous": "Anterior"
+                        },
+                        "aria": {
+                            "sortAscending": ": Activar orden de columna ascendente",
+                            "sortDescending": ": Activar orden de columna desendente"
+                        }
+                    },
+                    initComplete: function () {
+                        this.api()
+                            .columns([1,2])
+                            .every(function () {
+                                var column = this;
+                                var select = $('<select><option value=""></option></select>')
+                                    .appendTo($(column.footer()).empty())
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                        column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                    });
+
+                                column
+                                    .data()
+                                    .unique()
+                                    .sort()
+                                    .each(function (d, j) {
+                                        select.append('<option value="' + d + '">' + d + '</option>');
+                                    });
+                            });
+                    },
+                });
+            });
+        </script>
+    </body>
+</html>

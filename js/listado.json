@@ -1,0 +1,46 @@
+{
+    "tabla": {
+        "filas":[
+            {
+                "id":"1",
+                "nombre": "Paciente1",
+                "apellido": "Apellido1",
+                "rut": "25.258369-9",
+                "edad": "25",
+                "diagnostico":"limpieza"
+            },
+            {
+                "id":"2",
+                "nombre": "Paciente2",
+                "apellido": "Apellido2",
+                "rut": "25.258369-9",
+                "edad": "35",
+                "diagnostico":"exodoncia"
+            },
+            {
+                "id":"3",
+                "nombre": "Paciente3",
+                "apellido": "Apellido3",
+                "rut": "25.258369-9",
+                "edad": "42",
+                "diagnostico":"Carilla"
+            },
+            {
+                "id":"4",
+                "nombre": "Paciente4",
+                "apellido": "Apellido4",
+                "rut": "25.258369-9",
+                "edad": "58",
+                "diagnostico":"limpieza"
+            },
+            {
+                "id":"5",
+                "nombre": "Paciente5",
+                "apellido": "Apellido5",
+                "rut": "25.258369-9",
+                "edad": "47",
+                "diagnostico":"Tapadura"
+            }
+        ]
+    }
+}
