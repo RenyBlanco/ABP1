@@ -1,11 +1,20 @@
 function Consultorio() {
-    let paciente=""
+    let nombre=""
     
-    this.setPaciente = (_pac)=>{
-        paciente = _pac
+    this.setPaciente = (_nombre)=>{
+        paciente = _nombre
     }
     
     this.getPaciente = ()=>{
-        return paciente;
+        return nombre;
     }
+
+    this.buscarPaciente = (nombre)=>{
+
+    }
+    this.datos = ()=>{
+        `Nombre : ${nombre}, Apellido: ${apellido}, Edad: ${edad}, Diagnostico: ${diagnostico}`
+
+    }
+
 }

@@ -25,7 +25,7 @@ $(function() {
     // }
 
 
-    $(function(){
+    $(function(){ 
         //$(".cargar").click(function(){
           $.getJSON('js/listado.json', function(data){
             tabla = data.tabla.filas;

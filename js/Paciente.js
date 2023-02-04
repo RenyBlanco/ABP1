@@ -3,7 +3,7 @@ function Paciente() {
     let apellido=""
     let rut = ""
     let edad=""
-    let diagnostico=[];
+    let diagnostico="";
 
     this.setNombre = (_nombre)=>{
         nombre = _nombre
