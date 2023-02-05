@@ -10,17 +10,25 @@ function Consultorio() {
     }
 
     this.buscarPaciente = (lista, nome)=>{
-        const result = lista.find(({ nombre }) => nombre === nome);
+        const result = lista.find(e => e.setNombre === nome);
         if(result){
-            return `
-            <div>
-            <p>Nombre :${result.nombre}</p>
-            <p>Apellido :${result.apellido}</p>
-            <p>Rut :${result.rut}</p>
-            <p>Edad :${result.edad}</p>
-            <p>Diagnostico :${result.diagnostico}</p>
-            </div>
+            r = `
+            <div class="card mt-5" >
+                <div class="card-header">
+                    <div class="float-left">
+                        <h4 style="color: gray;"><i class="fa-solid fa-hospital-user"></i> Pacientes</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Nombre : ${result.setNombre}</p>
+                    <p>Apellido : ${result.setApellido}</p>
+                    <p>Rut : ${result.setRut}</p>
+                    <p>Edad : ${result.setEdad}</p>
+                    <p>Diagnostico : ${result.setDiagnostico}</p>
+                </div> <!-- /.card-body -->
+            </div> <!-- /.card -->
             `;
+            $("#tabla").html(r);
         }else{
             alert("Paciente no encontrado");
         }

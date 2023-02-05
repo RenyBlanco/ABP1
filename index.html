@@ -34,11 +34,18 @@
                 <p>Seleccione su opción</p>
                 <div class="col-12">
                     <div class="row">
+                        <div class="col-9">
+                            <div class="form-group row">
+                                <label for="nombre" class="col-2 col-form-label">Nombre :</label>
+                                <div class="col-6">
+                                    <input type="text" name="nombre" id="nombre" placeholder="Nombre paciente" autocomplete="off">
+                                    <button type="button" class="btn btn-outline-primary" onclick="buscar()">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="col-3">
                             <button type="button" class="btn btn-outline-secondary" onclick="mostrar()">Listado</button>
-                            <button type="button" class="btn btn-outline-primary" onclick="buscar()">Paciente</button>
                         </div>
-                        
                     </div>
                 </div>
                 <div class="col-12" id="tabla">

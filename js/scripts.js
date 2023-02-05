@@ -15,7 +15,7 @@
     
     function mostrar(){
         var card = `
-            <div class="card" >
+            <div class="card mt-5" >
                 <div class="card-header">
                     <div class="float-left">
                         <h4 style="color: gray;"><i class="fa-solid fa-hospital-user"></i> Pacientes</h4>
@@ -29,7 +29,6 @@
                                 <th>Apellido</th>
                                 <th>Rut</th>
                                 <th>Edad</th>
-                                <th>Diagnostico</th>
                             </tr>
                         </thead>
                         <tbody id="cuerpo">
@@ -42,13 +41,12 @@
         $("#tabla").html(card);
         $("#cuerpo").html("");
         for(var i=0; i<tabla.length; i++){
-            
             var tr = `<tr>
             <td>${tabla[i].nombre}</td>
             <td>${tabla[i].apellido}</td>
             <td>${tabla[i].rut}</td>
             <td>${tabla[i].edad}</td>
-            <td>${tabla[i].diagnostico}</td>
+            
             </tr>`;
             $("#cuerpo").append(tr)
         }
@@ -57,14 +55,5 @@
     function buscar(){
         const consulta = new Consultorio;
         consulta.buscarPaciente(pacientes, document.getElementById("nombre").value);
-        `
-        <div class="col-9">
-            <div class="form-group row">
-                <label for="nombre" class="col-2 col-form-label">Nombre :</label>
-                <div class="col-6">
-                    <input type="text" name="nombre" id="nombre" placeholder="Nombre paciente" autocomplete="off">
-                </div>
-            </div>
-        </div>
-        `
+       
     }
